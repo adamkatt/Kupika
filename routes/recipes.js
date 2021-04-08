@@ -1,9 +1,10 @@
-  const express = require('express')
+const express = require('express')
 const router = express.Router()
 const recipe = require('../models/recipes')
 
+
 // Getting all
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
     const recipes = await recipe.find()
     res.json(recipes)
@@ -14,12 +15,12 @@ router.get('/', async (req, res) => {
 
 
 // POST - Create new recipe
-router.post('/', async (req, res) => {
+router.post('/',  async (req, res, next) => {
   
   // create a recipe object with objects from the body
 
   const r = new recipe({
-    title: req.body.title,
+    name: req.body.name,
     author: req.body.author,
     date: req.body.date,
     description: req.body.description,

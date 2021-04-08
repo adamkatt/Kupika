@@ -1,10 +1,17 @@
-require("dotenv").config()
+const REACT_SERVER_URL = "http://localhost:3000"
+const PORT = 3001;
 
+require("dotenv").config()  
 const express = require("express")
 const app = express()
 const mongoose = require('mongoose')
 
-const PORT = 3000;
+// We need to enable cross-origin resource sharing in order for the React and Express servers to communicate from the same machine
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", REACT_SERVER_URL);
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true})
 const db = mongoose.connection
