@@ -1,5 +1,4 @@
-  
-const express = require('express')
+  const express = require('express')
 const router = express.Router()
 const recipe = require('../models/recipes')
 
@@ -13,25 +12,39 @@ router.get('/', async (req, res) => {
   }
 })
 
-// Getting One
-router.get('/:id', getrecipe, (req, res) => {
-  res.json(res.recipe)
-})
 
-// Creating one
+// POST - Create new recipe
 router.post('/', async (req, res) => {
-  const recipe = new recipe({
-    name: req.body.name,
-    subscribedToChannel: req.body.subscribedToChannel
-  })
+  
+  // create a recipe object with objects from the body
+
+  const r = new recipe({
+    title: req.body.title,
+    author: req.body.author,
+    date: req.body.date,
+    description: req.body.description,
+    ingredients: req.body.ingredients,
+    instructions: req.body.instructions,
+    image_url: req.body.image_url,
+    tags: req.body.tags
+  });
+
+  // attempt to save the recipe, error if you cannot
   try {
-    const newrecipe = await recipe.save()
+    const newrecipe = await r.save()
     res.status(201).json(newrecipe)
   } catch (err) {
     res.status(400).json({ message: err.message })
   }
 })
 
+/*
+// Getting One
+router.get('/:id', getrecipe, (req, res) => {
+  res.json(res.recipe)
+})*/
+
+/*
 // Updating One
 router.patch('/:id', getrecipe, async (req, res) => {
   if (req.body.name != null) {
@@ -57,7 +70,7 @@ router.delete('/:id', getrecipe, async (req, res) => {
     res.status(500).json({ message: err.message })
   }
 })
-
+*/
 async function getrecipe(req, res, next) {
   let recipe
   try {
