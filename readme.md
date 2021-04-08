@@ -1,7 +1,7 @@
 # Kupika Backend
 Recipe tracker website created for CP476.
 
-Frontend code: 
+Frontend code: https://github.com/nvplus/kupika-frontend
 
 ## How to Run Server
 1. ``npm install``
