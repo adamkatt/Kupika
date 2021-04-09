@@ -41,13 +41,13 @@ router.post('/',  async (req, res, next) => {
 
 
 // Getting One
-router.get('/:id', getrecipe, (req, res) => {
+router.get('/:id', getrecipe, (req, res, next) => {
   res.json(res.arecipe)
 })
 
 
 // Updating One
-router.patch('/:id', getrecipe, async (req, res) => {
+router.get('/edit/:id', getrecipe, async (req, res, next) => {
   if (req.body.name != null) {
     res.arecipe.name = req.body.name
   }
@@ -69,7 +69,7 @@ router.patch('/:id', getrecipe, async (req, res) => {
 })
 
 // Deleting One
-router.delete('/:id', getrecipe, async (req, res) => {
+router.get('/delete/:id', getrecipe, async (req, res, next) => {
   try {
     await res.arecipe.remove()
     res.json({ message: 'Deleted recipe' })
