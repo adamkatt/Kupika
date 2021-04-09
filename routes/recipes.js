@@ -47,7 +47,7 @@ router.get('/:id', getrecipe, (req, res, next) => {
 
 
 // Updating One
-router.get('/edit/:id', getrecipe, async (req, res, next) => {
+router.get('/:id/edit', getrecipe, async (req, res, next) => {
   if (req.body.name != null) {
     res.arecipe.name = req.body.name
   }
@@ -69,7 +69,7 @@ router.get('/edit/:id', getrecipe, async (req, res, next) => {
 })
 
 // Deleting One
-router.get('/delete/:id', getrecipe, async (req, res, next) => {
+router.get('/:id/delete', getrecipe, async (req, res, next) => {
   try {
     await res.arecipe.remove()
     res.json({ message: 'Deleted recipe' })
