@@ -47,7 +47,7 @@ router.get('/:id', getrecipe, (req, res, next) => {
 
 
 // Updating One
-router.get('/:id/edit', getrecipe, async (req, res, next) => {
+router.post('/:id/edit', getrecipe, async (req, res, next) => {
   if (req.body.name != null) {
     res.arecipe.name = req.body.name
   }
