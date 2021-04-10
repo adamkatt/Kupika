@@ -5,11 +5,16 @@ const recipe = require('../models/recipes')
 
 // Getting all
 router.get('/', async (req, res, next) => {
+  let searchOptions = {}
+  if (req.query.name != null && req.query.name !== '') {
+    searchOptions.name = new RegExp(req.query.name, 'i')
+  }
+
   try {
-    const recipes = await recipe.find()
+    const recipes = await recipe.find(searchOptions)
     res.json(recipes)
-  } catch (err) {
-    res.status(500).json({ message: err.message })
+  } catch {
+    res.redirect('/')
   }
 })
 
@@ -93,24 +98,6 @@ async function getrecipe(req, res, next) {
   res.arecipe = arecipe
   next()
 }
-//search bar
-router.get('/:name/search', async (req, res, next) => {
-    //var aname = req.params.aname
-    //let found
-    try{
-      //found = recipe.find({})
 
-    } catch (err){
-      return res.status(500).json({message: err.message})
-    }
-})
 
-router.get('/wow/:author', async (req, res, next) => {
-  try {
-    //const recipes = await recipe.find()
-    //res.json(recipes)
-  } catch (err) {
-    res.status(500).json({ message: err.message })
-  }
-})
 module.exports = router
