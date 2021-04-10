@@ -19,7 +19,8 @@ const recipeSchema = new mongoose.Schema(
       default: Date.now
     },
     description: {
-      type: String
+      type: String,
+      required: true
     },
     ingredients: {
       type: [],
@@ -33,7 +34,8 @@ const recipeSchema = new mongoose.Schema(
       type: String
     },
     tags: {
-      type: []
+      type: [],
+      required: true
     }
   },
   {
