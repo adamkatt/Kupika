@@ -6,8 +6,9 @@ const recipe = require('../models/recipes')
 // Getting all
 router.get('/', async (req, res, next) => {
   let searchOptions = {}
+  //res.json({ message:  req.query.name})
   if (req.query.name != null && req.query.name !== '') {
-    searchOptions.name = new RegExp(req.query.name, 'i')
+    searchOptions = {name: RegExp(req.query.name, 'i')}
   }
 
   try {
